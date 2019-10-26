@@ -14,7 +14,7 @@ $(document).ready(function() {
       var api="http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=" + apiKey;
   
       $.getJSON(api,function(data){
-        var type=data.weather.main;
+        var type=data.weather[0].description;
         var city=data.name;
         var tempKel=data.main.temp;
         var tempFar= ((tempKel*(9/5)-459.67).toFixed(1)) + "&#176;" + "F";
@@ -25,24 +25,21 @@ $(document).ready(function() {
         $(".temperature").html(tempFar);
       
         //change background pics
-      /*var code = data.current_observation.icon;  
-      if (code === "tstorms" || code === "chancetstorms") {// weatherPic = backgroundImg.thunder; 
+      var code = data.weather[0].main;  
+      if (code === "Thunderstorm" || code === "Tornado") {// weatherPic = backgroundImg.thunder; 
         $("body").css("background-image", "url(https://static.pexels.com/photos/99577/barn-lightning-bolt-storm-99577.jpeg)"); 
-      } else if (code === "rain" || code === "sleet" || code === "chancesleet" || code === "chancerain") { //weatherPic = backgroundImg.rain;
+      } else if (code === "Drizzle" || code === "Rain") { //weatherPic = backgroundImg.rain;
          $("body").css("background-image", "url(https://static.pexels.com/photos/39811/pexels-photo-39811.jpeg)");
-      } else if (code === "snow"  || code === "flurries" || code === "chancesnow" || code === "chanceflurries") {// weatherPic = backgroundImg.snow;
+      } else if (code === "Snow") {// weatherPic = backgroundImg.snow;
          $("body").css("background-image", "url(https://static.pexels.com/photos/235621/pexels-photo-235621.jpeg)");
-      } else if (code === "fog" || code === "hazy") {// weatherPic = backgroundImg.mist;
-        $("body").css("background-image", "url(https://static.pexels.com/photos/5230/road-fog-foggy-mist.jpg)");
-      } else if (code==="clear" || code === "partlysunny" || code === "mostlysunny") {// weatherPic = backgroundImg.clear;
+      } else if (code==="Clear") {// weatherPic = backgroundImg.clear;
         $("body").css("background-image", "url(https://static.pexels.com/photos/353140/pexels-photo-353140.jpeg)");
-      } else if (code==="cloudy" || code === "partlycloudy" || code === "mostlycloudy") {// weatherPic = backgroundImg.clouds;
+      } else if (code==="Clouds") {// weatherPic = backgroundImg.clouds;
          $("body").css("background-image", "url(https://static.pexels.com/photos/273280/pexels-photo-273280.jpeg)");
-      } else if (code === "unknown" ) {//  weatherPic = backgroundImg.extreme;
-        $("body").css("background-image", "url(https://i.ytimg.com/vi/EinzBoVnmRs/maxresdefault.jpg)");
-      } else {// weatherPic = backgroundImg.default;
-       $("body").css("background-image", "url(https://static.pexels.com/photos/247528/pexels-photo-247528.jpeg)");
-      }*/
+      } else {// weatherPic = backgroundImg.default;FOG
+        $("body").css("background-image", "url(https://static.pexels.com/photos/5230/road-fog-foggy-mist.jpg)");
+       //$("body").css("background-image", "url(https://static.pexels.com/photos/247528/pexels-photo-247528.jpeg)");
+      }
         
       //click on radio button to toggle
       $('#far').on('click', function(){
