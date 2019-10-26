@@ -10,22 +10,22 @@ $(document).ready(function() {
       location= data2.loc.split(",");
       lat=location[0];
       lon=location[1];
-       var api="https://api.wunderground.com/api/c0262ee30e7c30c6"+ "/conditions/q/" + lat + "," + lon + ".json"; 
-      //https://api.wunderground.com/api/c0262ee30e7c30c6/conditions/q/45.5076,-122.4307.json
+      var apiKey="d4e9ed0b810e73c1c9f8bf217231a27f";
+      var api="http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=" + apiKey;
   
       $.getJSON(api,function(data){
-        var type=data.current_observation.weather;
-        var city=data.current_observation.display_location.city + ", " + data.current_observation.display_location.state;
-        var tempFar=data.current_observation.temp_f + "&#176;" + "F";
-        var tempCel=data.current_observation.temp_c + "&#176;" + "C";
-        
+        var type=data.weather.main;
+        var city=data.name;
+        var tempKel=data.main.temp;
+        var tempFar= ((tempKel*(9/5)-459.67).toFixed(1)) + "&#176;" + "F";
+        var tempCel= ((tempKel-273).toFixed(1)) + "&#176;" + "C";
+        //https://www.youtube.com/watch?v=aLKJhOmBjBw&t=83s
         $(".city").html(city);
         $(".type").html(type);
         $(".temperature").html(tempFar);
       
-      //https://www.wunderground.com/weather/api/d/docs?d=resources/phrase-glossary&_ga=2.107369538.1958219686.1498710252-1057868763.1498710252  
         //change background pics
-    var code = data.current_observation.icon;  
+      /*var code = data.current_observation.icon;  
       if (code === "tstorms" || code === "chancetstorms") {// weatherPic = backgroundImg.thunder; 
         $("body").css("background-image", "url(https://static.pexels.com/photos/99577/barn-lightning-bolt-storm-99577.jpeg)"); 
       } else if (code === "rain" || code === "sleet" || code === "chancesleet" || code === "chancerain") { //weatherPic = backgroundImg.rain;
@@ -42,9 +42,9 @@ $(document).ready(function() {
         $("body").css("background-image", "url(https://i.ytimg.com/vi/EinzBoVnmRs/maxresdefault.jpg)");
       } else {// weatherPic = backgroundImg.default;
        $("body").css("background-image", "url(https://static.pexels.com/photos/247528/pexels-photo-247528.jpeg)");
-      }
+      }*/
         
-        //click on radio button to toggle
+      //click on radio button to toggle
       $('#far').on('click', function(){
                   $(".temperature").html(tempFar);
       });
