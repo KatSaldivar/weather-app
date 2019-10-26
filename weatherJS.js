@@ -11,7 +11,7 @@ $(document).ready(function() {
       lat=location[0];
       lon=location[1];
       var apiKey="d4e9ed0b810e73c1c9f8bf217231a27f";
-      var api="http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=" + apiKey;
+      var api="https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=" + apiKey;
   
       $.getJSON(api,function(data){
         var type=data.weather[0].description;
